@@ -63,8 +63,10 @@ const BookDemoForm = ({ submit_text = "Submit" }: BookDemoFormProps) => {
     //   })
     //   .catch(() => {
     //     setErrorMessage(true);
-    //   });   
+    //   });
 
+
+    //sending data to Google Sheets
     const dataForSheet = new URLSearchParams();
     const utmSource = new URLSearchParams(window.location.search).get("utm_source") || "";
     const utmAnchor = window.location.hash ? window.location.hash.slice(1) : "";
