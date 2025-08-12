@@ -42,20 +42,47 @@ const BookDemoForm = ({ submit_text = "Submit" }: BookDemoFormProps) => {
   };
 
   const onSubmit = () => {
-    const data = new FormData();
-    data.append("first_name", values.first_name);
-    data.append("last_name", values.last_name);
-    data.append("email", values.email);
-    data.append("website_url", values.website_url);
-    data.append(
-      "tell_us_more",
-      `${values.tell_us_more} \n\nform_source:${window.location.pathname + window.location.search + window.location.hash}`,
-    );
+    
+    // const data = new FormData();
+    // data.append("first_name", values.first_name);
+    // data.append("last_name", values.last_name);
+    // data.append("email", values.email);
+    // data.append("website_url", values.website_url);
+    // data.append(
+    //   "tell_us_more",
+    //   `${values.tell_us_more} \n\nform_source:${window.location.pathname + window.location.search + window.location.hash}`,
+    // );
 
-    fetch("https://pkgs.defguard.net/api/customer/signup", {
-      mode: "no-cors",
+    // fetch("https://pkgs.defguard.net/api/customer/signup", {
+    //   mode: "no-cors",
+    //   method: "POST",
+    //   body: data,
+    // })
+    //   .then(() => {
+    //     setOkMessage(true);
+    //   })
+    //   .catch(() => {
+    //     setErrorMessage(true);
+    //   });   
+
+    const dataForSheet = new URLSearchParams();
+    const utmSource = new URLSearchParams(window.location.search).get("utm_source") || "";
+    const utmAnchor = window.location.hash ? window.location.hash.slice(1) : "";
+
+    dataForSheet.append("first_name", values.first_name);
+    dataForSheet.append("last_name", values.last_name);
+    dataForSheet.append("email", values.email);
+    dataForSheet.append("website_url", values.website_url);
+    dataForSheet.append("tell_us_more", values.tell_us_more);
+    dataForSheet.append("utm_source", utmSource);
+    dataForSheet.append("utm_anchor", utmAnchor);
+
+    fetch("https://script.google.com/macros/s/AKfycbwzb0VMOExWk9RmMu6tfGXroddK7lB5VjW-QSWEKGBMyNgtVr1MKM-2xEIkh7AW6-Ex/exec", {
       method: "POST",
-      body: data,
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: dataForSheet.toString(),
     })
       .then(() => {
         setOkMessage(true);
