@@ -79,7 +79,7 @@ const BookDemoForm = ({ submit_text = "Submit" }: BookDemoFormProps) => {
     dataForSheet.append("utm_source", utmSource);
     dataForSheet.append("utm_anchor", utmAnchor);
 
-    fetch("https://script.google.com/macros/s/AKfycbwzb0VMOExWk9RmMu6tfGXroddK7lB5VjW-QSWEKGBMyNgtVr1MKM-2xEIkh7AW6-Ex/exec", {
+    fetch("https://script.google.com/macros/s/AKfycbxkRN6OUS7dUcljg29aBwMWW7fM8ei1TX0mugEtWi3Qt6fCpPIWsqNcURbXQNWYAGr3/exec", {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
